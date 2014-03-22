@@ -1,12 +1,17 @@
-# ti-installr-hook
+# ti-installr-hook [![Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/) 
 
-A titanium cli hook for deploying builds to [installr](www.installrapp.com), based on [ti-testflight-hook](https://github.com/dbankier/ti-testflight-hook)
+
+
+A titanium cli hook for deploying builds to [installr](http://www.installrapp.com), based on [ti-testflight-hook](https://github.com/dbankier/ti-testflight-hook)
 
 ## Installation
+
+[![NPM](https://nodei.co/npm/ti-installr-hook.png)](https://nodei.co/npm/ti-installr-hook/)
 
 ~~~
 $ npm install -g ti-installr-hook
 ~~~
+
 
 ## Usage
 
