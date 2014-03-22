@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+var spawn = require('child_process').spawn,
+    path  = require('path');
+
+var xspawn = function(cmd,args) {
+  if (process.platform === 'win32') {
+    args = ['/c',cmd].concat(args);
+    cmd = process.env.comspec;
+  }
+  return spawn(cmd,args);
+}
+
+var hooks = xspawn('ti', ['config','-a','paths.hooks',path.join( __dirname ,'..', 'plugin','ti.installr','hooks')]);
+hooks.stderr.pipe(process.stderr);
+hooks.on("exit", function(code) {
+  code === 0 && console.log("ti-installr-hook hook installed");
+});

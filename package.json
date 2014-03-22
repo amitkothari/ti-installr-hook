@@ -1,0 +1,30 @@
+{
+  "name": "ti-installr-hook",
+  "version": "0.1.0",
+  "description": "ti cli hook for deploying builds to installr",
+  "scripts": {
+    "postinstall": "node bin/install"
+  },
+  "bin": {
+    "ti-installr-hook": "./bin/install"
+  },
+  "keywords": [
+    "titanium",
+    "cli",
+    "appcelerator",
+    "hook",
+    "installr"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amitkothari/ti-installr-hook"
+  },
+  "author": "Amit Kothari <amit@amitkothari.com>",
+  "license": "MIT",
+  "dependencies": {
+    "underscore": "~1.6.0",
+    "request": "~2.34.0",
+    "fields": "~0.1.12",
+    "node-appc": "~0.2.0"
+  }
+}
