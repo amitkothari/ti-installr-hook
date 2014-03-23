@@ -18,22 +18,14 @@ exports.init = function (_logger, config, cli, appc) {
 };
 
 function configure(data, finished) {
-    platform = data.cli.argv.platform;
-
-    if (data.buildManifest.outputDir === undefined && data.iosBuildDir === undefined) {
-        logger.error("Output directory must be defined to use --installr flag");
-        return;
-    }
-    if (['android', 'ios'].indexOf(platform) === -1) {
-        logger.error("Only android and ios support with --installr flag");
-        return;
-    }
+    var apiTokenProperty = data.tiapp.properties['installr.api_token'];
 
     config = {};
     config.releaseNotes = data.cli.argv['installr-release-notes'];
-    config.apiToken = data.tiapp.properties['installr.api_token'];
 
-    if (!config.apiToken) {
+    if (apiTokenProperty && apiTokenProperty.value) {
+        config.apiToken = apiTokenProperty.value;
+    } else {
         logger.error("installr.apiToken is missing.");
         return;
     }
@@ -64,11 +56,13 @@ function doPrompt(finished) {
     });
 }
 function upload2Installr(data, finished) {
+    validate(data);
+
     logger.info('Uploading app to installr');
 
     var r = request.post({
         url: 'https://www.installrapp.com/apps.json',
-        headers: {'X-InstallrAppToken': config.apiToken.value}
+        headers: {'X-InstallrAppToken': config.apiToken}
     }, function optionalCallback(err, httpResponse, body) {
         if (err) {
             logger.error(err);
@@ -83,4 +77,17 @@ function upload2Installr(data, finished) {
     var form = r.form();
     form.append('qqfile', fs.createReadStream(build_file));
     form.append('releaseNotes', config.releaseNotes);
+}
+
+function validate(data) {
+    platform = data.cli.argv.platform;
+
+    if (data.buildManifest.outputDir === undefined && data.iosBuildDir === undefined) {
+        logger.error("Output directory must be defined to use --installr flag");
+        return;
+    }
+    if (['android', 'ios'].indexOf(platform) === -1) {
+        logger.error("Only android and ios support with --installr flag");
+        return;
+    }
 }
