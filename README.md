@@ -1,4 +1,4 @@
-# ti-installr-hook [![Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/) 
+# ti-installr-hook [![Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/)
 
 
 
@@ -21,6 +21,12 @@ Add the installr api token to your tiapp.xml file.
   <property name="installr.api_token">ENTER_INSTALLR_API_TOKEN_HERE</property>
 ~~~
 
+Optional - Set `installr.notify` to true, to notify all the testers that a new build is available.
+
+~~~
+  <property name="installr.notify" type="bool">true</property>
+~~~
+
 
 Use the `--installr` flag with the titanium cli to upload to installr. For example:
 
@@ -28,13 +34,15 @@ Use the `--installr` flag with the titanium cli to upload to installr. For examp
 $ ti build -p ios -T dist-adhoc --installr
 ~~~
 
-**You will be prompted for the release notes.**
-
-You can also pass release notes using `--installr-release-notes` flag. For example:
+Set release notes using `--installr-release-notes` flag. For example:
 
 ~~~
 $ ti build -p ios -T dist-adhoc --installr --installr-release-notes='New build with awesome features'
 ~~~
+
+**If not set, you will be prompted for release notes and notify flag**
+
+
 
 ### Thanks to
 

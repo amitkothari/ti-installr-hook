@@ -1,6 +1,6 @@
 {
   "name": "ti-installr-hook",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "ti cli hook for deploying builds to installr",
   "scripts": {
     "postinstall": "node bin/install"
