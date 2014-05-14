@@ -9,9 +9,10 @@ A titanium cli hook for deploying builds to [installr](http://www.installrapp.co
 [![NPM](https://nodei.co/npm/ti-installr-hook.png)](https://nodei.co/npm/ti-installr-hook/)
 
 ~~~
-$ npm install -g ti-installr-hook
+$ npm install -g ti-installr-hook --unsafe-perm
 ~~~
 
+You need `--unsafe-perm` to auto-install the hook.
 
 ## Usage
 
