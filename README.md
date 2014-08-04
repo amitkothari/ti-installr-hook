@@ -28,6 +28,12 @@ Optional - Set `installr.notify` to true, to notify all the testers that a new b
   <property name="installr.notify" type="bool">true</property>
 ~~~
 
+Optional - Set `installr.default_testers` email address you want to invite to the latest build. Use comma-space for more than one email address
+
+~~~
+  <property name="installr.default_testers">someemail@domain.com, other@email.com</property>
+~~~
+
 
 Use the `--installr` flag with the titanium cli to upload to installr. For example:
 
