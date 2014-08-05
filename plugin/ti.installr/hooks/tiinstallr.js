@@ -81,10 +81,31 @@ function upload2Installr(data, finished) {
     }, function optionalCallback(err, httpResponse, body) {
         if (err) {
             logger.error(err);
+            finished();
         } else {
-            logger.info("App uploaded successfully.")
+            logger.info("App uploaded successfully.");
+            // check if we want to invite testers
+            if (config.default_testers) {
+                logger.info('Adding tester(s) '+config.default_testers+' to latest build');
+                var resp = JSON.parse(body);
+                var r = request.post({
+                    url: 'https://www.installrapp.com/apps/'+resp.appData.id+'/builds/'+resp.appData.latestBuild.id+'/team.json',
+                    headers: {'X-InstallrAppToken': config.api_token}
+                }, function optionalCallback(err, httpResponse, body) {
+                    if (err) {
+                        logger.error(err);
+                    } else {
+                        logger.info("Tester(s) invited successfully.");
+
+                    }
+                    finished();
+                }); 
+                var form = r.form();
+                form.append('emails', config.default_testers);             
+            } else {
+                finished();
+            }            
         }
-        finished();
     });
 
     var build_file = afs.resolvePath(path.join(data.buildManifest.outputDir, data.buildManifest.name + "." + (data.cli.argv.platform === "android" ? "apk" : "ipa")));
