@@ -28,6 +28,14 @@ function configure(data, finished) {
 
     config.releaseNotes = data.cli.argv['installr-release-notes'];
 
+    if( ! config.add ){
+      config.add = data.cli.argv['installr-add'];      
+    }
+
+    if( ! config.notify ){
+      config.notify = data.cli.argv['installr-notify'];      
+    }
+
     if (!config.api_token) {
         logger.error("installr.api_token is missing.");
         return;
@@ -114,6 +122,9 @@ function upload2Installr(data, finished) {
     form.append('qqfile', fs.createReadStream(build_file));
     form.append('releaseNotes', config.releaseNotes);
     form.append('notify', config.notify.toString());
+    if( config.add ){
+      form.append('add', config.add.toString());
+    }
 }
 
 function validate(data) {
