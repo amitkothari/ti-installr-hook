@@ -19,6 +19,7 @@ exports.init = function (_logger, config, cli, appc) {
 
 function configure(data, finished) {
     config = {};
+    config.api_token = process.env.INSTALLR_API_TOKEN;
 
     var keys = _.keys(data.tiapp.properties).filter(function(e) { return e.match("^installr\.");});
 
